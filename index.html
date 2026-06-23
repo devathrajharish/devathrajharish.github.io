@@ -423,18 +423,18 @@
     .avatar-box {
       width: 100%;
       aspect-ratio: 1;
-      background: linear-gradient(135deg, #0d0d22, #161630);
       border: 2px solid rgba(124,110,232,0.35);
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 42px;
-      font-weight: 700;
-      color: var(--purple);
-      text-shadow: 0 0 30px rgba(124,110,232,0.5);
+      overflow: hidden;
       margin-bottom: 16px;
+      box-shadow: 0 0 30px rgba(124,110,232,0.18);
+    }
+    .avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
     .info-row {
       display: flex;
@@ -854,7 +854,7 @@
       </div>
       <div class="about-side fade-up delay-1">
         <div class="glass-card">
-          <div class="avatar-box">H.D</div>
+          <div class="avatar-box"><img src="profile.jpg" alt="Harish Devathraj"></div>
           <div class="info-row"><span class="info-icon">✉</span> devathrajharish@gmail.com</div>
           <div class="info-row"><span class="info-icon">📍</span> Bangalore, India</div>
           <div class="info-row"><span class="info-icon">🎓</span> MS CS · Univ. of Houston</div>
