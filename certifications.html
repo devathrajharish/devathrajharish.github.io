@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certifications | Harish Devathraj</title>
+  <meta name="description" content="Professional certifications earned by Harish Devathraj — Databricks Data Engineering Professional and Associate.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:           #05050f;
+      --bg2:          #08081a;
+      --purple:       #7C6EE8;
+      --purple-light: #AFA9EC;
+      --teal:         #0ECFA5;
+      --blue:         #4A9EFF;
+      --amber:        #FAC775;
+      --text:         #E8E8FF;
+      --muted:        #7070A0;
+      --dim:          #3a3a5c;
+      --border:       rgba(124,110,232,0.18);
+      --border-h:     rgba(124,110,232,0.55);
+      --glow-p:       0 0 30px rgba(124,110,232,0.35);
+      --glow-t:       0 0 30px rgba(14,207,165,0.35);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124,110,232,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,110,232,0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(90px); }
+    .orb-1 { width: 500px; height: 500px; background: rgba(124,110,232,0.06); top: -150px; right: -100px; }
+    .orb-2 { width: 350px; height: 350px; background: rgba(14,207,165,0.045); bottom: 80px; left: -100px; }
+    .orb-3 { width: 260px; height: 260px; background: rgba(74,158,255,0.03); top: 50%; left: 40%; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(5,5,15,0.85);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--purple-light);
+      letter-spacing: 3px;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 34px; list-style: none; }
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: var(--purple);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    .nav-links a:hover { color: var(--purple-light); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--teal); }
+    .nav-links a.active::after { transform: scaleX(1); background: var(--teal); }
+    .nav-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      border: 1px solid rgba(14,207,165,0.45);
+      padding: 7px 16px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover { background: rgba(14,207,165,0.07); box-shadow: var(--glow-t); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--muted); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 62px; left: 0; right: 0;
+      background: rgba(5,5,15,0.97);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 2rem;
+      flex-direction: column;
+      gap: 22px;
+      z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .mobile-menu a:hover { color: var(--teal); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 140px 0 60px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .page-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .page-tag::before { content: '// '; color: var(--dim); }
+    .page-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .page-title .gradient {
+      background: linear-gradient(130deg, var(--purple-light), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .page-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 12px;
+      line-height: 1.75;
+    }
+    .cert-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--amber);
+      border: 1px solid rgba(250,199,117,0.3);
+      padding: 5px 14px;
+      border-radius: 2px;
+      margin-top: 12px;
+    }
+    .cert-count::before { content: '★'; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(124,110,232,0.4), transparent);
+      margin: 0 0 80px;
+    }
+
+    /* ── HALL OF FAME GRID ── */
+    .hof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      padding-bottom: 100px;
+    }
+
+    /* ── CERT CARD ── */
+    .cert-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.35s, box-shadow 0.35s, transform 0.25s;
+    }
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--purple), transparent);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .cert-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(124,110,232,0.07) 0%, transparent 65%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .cert-card:hover {
+      border-color: var(--border-h);
+      box-shadow: 0 16px 50px rgba(124,110,232,0.18), 0 0 0 1px rgba(124,110,232,0.08);
+      transform: translateY(-6px);
+    }
+    .cert-card:hover::before,
+    .cert-card:hover::after { opacity: 1; }
+
+    /* Pro card gold accent */
+    .cert-card.pro {
+      border-color: rgba(250,199,117,0.22);
+    }
+    .cert-card.pro::before {
+      background: linear-gradient(90deg, transparent, var(--amber), transparent);
+    }
+    .cert-card.pro::after {
+      background: radial-gradient(ellipse at 50% 0%, rgba(250,199,117,0.07) 0%, transparent 65%);
+    }
+    .cert-card.pro:hover {
+      border-color: rgba(250,199,117,0.5);
+      box-shadow: 0 16px 50px rgba(250,199,117,0.14), 0 0 0 1px rgba(250,199,117,0.08);
+    }
+
+    /* Rank badge */
+    .rank-badge {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+    .rank-pro {
+      background: rgba(250,199,117,0.12);
+      color: var(--amber);
+      border: 1px solid rgba(250,199,117,0.35);
+    }
+    .rank-assoc {
+      background: rgba(124,110,232,0.12);
+      color: var(--purple-light);
+      border: 1px solid rgba(124,110,232,0.35);
+    }
+
+    /* Badge image */
+    .badge-frame {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .cert-card.pro .badge-frame {
+      background: radial-gradient(circle, rgba(250,199,117,0.08) 0%, transparent 70%);
+      box-shadow: 0 0 40px rgba(250,199,117,0.15), 0 0 80px rgba(250,199,117,0.06);
+    }
+    .cert-card:not(.pro) .badge-frame {
+      background: radial-gradient(circle, rgba(124,110,232,0.08) 0%, transparent 70%);
+      box-shadow: 0 0 40px rgba(124,110,232,0.18), 0 0 80px rgba(124,110,232,0.07);
+    }
+    .badge-frame img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
+      transition: transform 0.3s, filter 0.3s;
+    }
+    .cert-card:hover .badge-frame img {
+      transform: scale(1.06);
+      filter: drop-shadow(0 6px 28px rgba(0,0,0,0.5));
+    }
+
+    /* Pulse ring */
+    .pulse-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid;
+      animation: pulse-out 2.8s ease-out infinite;
+      pointer-events: none;
+    }
+    .cert-card.pro .pulse-ring { border-color: rgba(250,199,117,0.25); }
+    .cert-card:not(.pro) .pulse-ring { border-color: rgba(124,110,232,0.25); }
+    @keyframes pulse-out {
+      0%   { transform: scale(1);    opacity: 0.8; }
+      100% { transform: scale(1.28); opacity: 0; }
+    }
+
+    /* Card text */
+    .cert-issuer {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 8px;
+    }
+    .cert-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .cert-level {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    /* Verify button */
+    .verify-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 3px;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      margin-top: auto;
+    }
+    .cert-card.pro .verify-btn {
+      color: var(--amber);
+      border: 1px solid rgba(250,199,117,0.4);
+    }
+    .cert-card.pro .verify-btn:hover {
+      background: rgba(250,199,117,0.07);
+      box-shadow: 0 0 20px rgba(250,199,117,0.2);
+      transform: translateY(-1px);
+    }
+    .cert-card:not(.pro) .verify-btn {
+      color: var(--purple-light);
+      border: 1px solid rgba(124,110,232,0.4);
+    }
+    .cert-card:not(.pro) .verify-btn:hover {
+      background: rgba(124,110,232,0.07);
+      box-shadow: var(--glow-p);
+      transform: translateY(-1px);
+    }
+    .verify-arrow { font-size: 12px; transition: transform 0.2s; }
+    .verify-btn:hover .verify-arrow { transform: translateX(3px); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      padding: 40px 0;
+      border-top: 1px solid rgba(124,110,232,0.1);
+      border-bottom: 1px solid rgba(124,110,232,0.1);
+      margin-bottom: 80px;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--purple-light);
+      text-shadow: 0 0 20px rgba(175,169,236,0.4);
+    }
+    .stat-l {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-top: 6px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #030308;
+      border-top: 1px solid rgba(124,110,232,0.12);
+      padding: 32px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--purple-light); letter-spacing: 2px; }
+    .footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--dim); letter-spacing: 1px; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--dim); text-decoration: none; letter-spacing: 1px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--teal); }
+
+    /* ── Fade animation ── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: 0.15s; }
+    .fade-up.delay-2 { transition-delay: 0.3s; }
+
+    @media (max-width: 720px) {
+      .hof-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .stats-bar { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">H<span>.</span>D</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#skills">Stack</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="certifications.html" class="active">Certs</a></li>
+  </ul>
+  <a href="mailto:devathrajharish@gmail.com" class="nav-cta">Hire Me</a>
+  <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#about" onclick="closeMenu()">About</a>
+  <a href="index.html#skills" onclick="closeMenu()">Stack</a>
+  <a href="index.html#projects" onclick="closeMenu()">Projects</a>
+  <a href="index.html#contact" onclick="closeMenu()">Contact</a>
+  <a href="certifications.html" onclick="closeMenu()">Certifications</a>
+  <a href="mailto:devathrajharish@gmail.com" onclick="closeMenu()">Hire Me</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <span class="page-tag">hall_of_fame</span>
+    <h1 class="page-title">Certified <span class="gradient">Excellence</span></h1>
+    <p class="page-subtitle">Industry-recognized credentials validating deep expertise in data engineering on the Databricks Lakehouse Platform.</p>
+    <div class="cert-count">2 ACTIVE CERTIFICATIONS</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="divider"></div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar fade-up">
+    <div class="stat-item">
+      <div class="stat-n">2</div>
+      <div class="stat-l">Certifications</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">Pro</div>
+      <div class="stat-l">Highest Level</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">DB</div>
+      <div class="stat-l">Databricks</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">✓</div>
+      <div class="stat-l">Verified</div>
+    </div>
+  </div>
+
+  <!-- HALL OF FAME GRID -->
+  <div class="hof-grid">
+
+    <!-- PROFESSIONAL (gold) -->
+    <div class="cert-card pro fade-up">
+      <span class="rank-badge rank-pro">★ Professional</span>
+      <div class="badge-frame">
+        <div class="pulse-ring"></div>
+        <img
+          src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/183934845"
+          alt="Databricks Certified Data Engineer Professional badge"
+          loading="lazy"
+        >
+      </div>
+      <div class="cert-issuer">Databricks</div>
+      <div class="cert-name">Data Engineer<br>Professional</div>
+      <div class="cert-level">Advanced certification — production-grade Lakehouse engineering</div>
+      <a
+        href="https://credentials.databricks.com/3ca4531e-5443-4c7a-80cd-b17dc3602faa#acc.wXq56uG4"
+        target="_blank"
+        rel="noopener"
+        class="verify-btn"
+      >
+        Verify Credential <span class="verify-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- ASSOCIATE (purple) -->
+    <div class="cert-card fade-up delay-1">
+      <span class="rank-badge rank-assoc">Associate</span>
+      <div class="badge-frame">
+        <div class="pulse-ring"></div>
+        <img
+          src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/110473626"
+          alt="Databricks Certified Data Engineer Associate badge"
+          loading="lazy"
+        >
+      </div>
+      <div class="cert-issuer">Databricks</div>
+      <div class="cert-name">Data Engineer<br>Associate</div>
+      <div class="cert-level">Foundational certification — Delta Lake, ETL, and pipeline design</div>
+      <a
+        href="https://credentials.databricks.com/99d9b9b1-6db0-4065-8361-e66b5014cbf6#acc.qYj139tG"
+        target="_blank"
+        rel="noopener"
+        class="verify-btn"
+      >
+        Verify Credential <span class="verify-arrow">→</span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">H<span style="color:var(--teal)">.</span>D</div>
+      <div class="footer-copy">© 2025 Harish Devathraj · Built with PySpark and ☕</div>
+      <div class="footer-links">
+        <a href="https://github.com/devathrajharish" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/devathrajharish/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:devathrajharish@gmail.com">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
