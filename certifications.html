@@ -451,12 +451,74 @@
     .fade-up.delay-1 { transition-delay: 0.15s; }
     .fade-up.delay-2 { transition-delay: 0.3s; }
 
+    /* ── MINI CERT CARDS ── */
+    .additional-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin: 60px 0 28px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(124,110,232,0.08);
+    }
+    .additional-label::before { content: '// '; }
+    .hof-grid-mini {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      padding-bottom: 100px;
+    }
+    .cert-mini {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.22s;
+    }
+    .cert-mini::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--purple), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .cert-mini:hover {
+      border-color: var(--border-h);
+      box-shadow: 0 10px 34px rgba(124,110,232,0.16);
+      transform: translateY(-5px);
+    }
+    .cert-mini:hover::before { opacity: 1; }
+    .cert-mini img {
+      width: 115px;
+      height: 115px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.4));
+      transition: transform 0.25s, filter 0.25s;
+    }
+    .cert-mini:hover img {
+      transform: scale(1.07);
+      filter: drop-shadow(0 6px 22px rgba(0,0,0,0.5));
+    }
+
     @media (max-width: 720px) {
       .hof-grid { grid-template-columns: 1fr; }
+      .hof-grid-mini { grid-template-columns: repeat(2, 1fr); }
       .nav-links { display: none; }
       .nav-cta { display: none; }
       .hamburger { display: flex; }
       .stats-bar { gap: 32px; }
+    }
+    @media (max-width: 480px) {
+      .hof-grid-mini { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -496,7 +558,7 @@
     <span class="page-tag">hall_of_fame</span>
     <h1 class="page-title">Certified <span class="gradient">Excellence</span></h1>
     <p class="page-subtitle">Industry-recognized credentials validating deep expertise in data engineering on the Databricks Lakehouse Platform.</p>
-    <div class="cert-count">2 ACTIVE CERTIFICATIONS</div>
+    <div class="cert-count">11 ACTIVE CERTIFICATIONS</div>
   </div>
 </div>
 
@@ -506,7 +568,7 @@
   <!-- STATS BAR -->
   <div class="stats-bar fade-up">
     <div class="stat-item">
-      <div class="stat-n">2</div>
+      <div class="stat-n">11</div>
       <div class="stat-l">Certifications</div>
     </div>
     <div class="stat-item">
@@ -574,6 +636,38 @@
       </a>
     </div>
 
+  </div>
+
+  <!-- ADDITIONAL BADGES -->
+  <div class="additional-label fade-up">additional_credentials</div>
+  <div class="hof-grid-mini">
+    <div class="cert-mini fade-up">
+      <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/184834444" alt="Certification badge" loading="lazy">
+    </div>
+    <div class="cert-mini fade-up delay-1">
+      <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/184757647" alt="Certification badge" loading="lazy">
+    </div>
+    <div class="cert-mini fade-up delay-2">
+      <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/183860123" alt="Certification badge" loading="lazy">
+    </div>
+    <div class="cert-mini fade-up">
+      <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/175172083" alt="Certification badge" loading="lazy">
+    </div>
+    <div class="cert-mini fade-up delay-1">
+      <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/175184500" alt="Certification badge" loading="lazy">
+    </div>
+    <div class="cert-mini fade-up delay-2">
+      <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/175187631" alt="Certification badge" loading="lazy">
+    </div>
+    <div class="cert-mini fade-up">
+      <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/175140932" alt="Certification badge" loading="lazy">
+    </div>
+    <div class="cert-mini fade-up delay-1">
+      <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/170144309" alt="Certification badge" loading="lazy">
+    </div>
+    <div class="cert-mini fade-up delay-2">
+      <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/139416473" alt="Certification badge" loading="lazy">
+    </div>
   </div>
 </div>
 
