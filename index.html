@@ -733,6 +733,49 @@
     .footer-links a:hover { color: var(--teal); }
 
     /* ─────────────────────────────────────
+       WORK EXPERIENCE GROUPING
+    ───────────────────────────────────── */
+    .exp-block { margin-bottom: 52px; }
+    .exp-block:last-child { margin-bottom: 0; }
+    .exp-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+      padding-bottom: 13px;
+      border-bottom: 1px solid rgba(124,110,232,0.14);
+    }
+    .exp-co-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--purple-light);
+      letter-spacing: 1px;
+    }
+    .exp-co-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.2px;
+      color: var(--dim);
+    }
+    .poc-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      background: rgba(250,199,117,0.08);
+      border: 1px solid rgba(250,199,117,0.28);
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* ─────────────────────────────────────
        BADGES STRIP
     ───────────────────────────────────── */
     #badges { background: var(--bg2); }
@@ -812,7 +855,7 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Stack</a></li>
-    <li><a href="#projects">Projects</a></li>
+    <li><a href="#projects">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="certifications.html">Certs</a></li>
   </ul>
@@ -824,7 +867,7 @@
 <div class="mobile-menu" id="mobile-menu">
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#skills" onclick="closeMenu()">Stack</a>
-  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#projects" onclick="closeMenu()">Experience</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
   <a href="certifications.html" onclick="closeMenu()">Certifications</a>
   <a href="mailto:devathrajharish@gmail.com" onclick="closeMenu()">Hire Me</a>
@@ -838,7 +881,7 @@
         <div class="hero-badge">Senior Data Engineer</div>
         <h1 class="hero-title">Harish<br><span class="gradient">Devathraj</span></h1>
         <p class="hero-role">Building <em id="tw">Azure data platforms</em><span class="cursor">_</span></p>
-        <p class="hero-desc">5+ years engineering scalable ETL pipelines, cloud data platforms, and analytics solutions on Azure and Databricks. Currently at Tredence, architecting and delivering enterprise-scale data modernization end-to-end.</p>
+        <p class="hero-desc">6+ years engineering scalable ETL pipelines, cloud data platforms, and analytics solutions on Azure and Databricks. Currently at Tredence, delivering enterprise-scale data integration across supply chain systems end-to-end.</p>
         <div class="hero-btns">
           <a href="#projects" class="btn-primary">View Projects</a>
           <a href="mailto:devathrajharish@gmail.com" class="btn-outline">Get In Touch</a>
@@ -860,7 +903,7 @@
         <div class="term-body">
           <div class="td">$ databricks run --job ddh_nextgen</div>
           <div class="tc">✓ SAP ingestion complete</div>
-          <div class="td">&nbsp;&nbsp;rows: <span class="tp">5,000,000,000</span></div>
+          <div class="td">&nbsp;&nbsp;rows: <span class="tp">15,000,000,000</span></div>
           <div class="tc">✓ PySpark transforms applied</div>
           <div class="td">&nbsp;&nbsp;null_rate: <span class="tp">0.02%</span></div>
           <div class="td">&nbsp;&nbsp;accuracy: <span class="tp">99.9%</span></div>
@@ -896,7 +939,7 @@
     <h2 class="section-h fade-up delay-1">Who I Am</h2>
     <div class="about-grid">
       <div>
-        <p class="about-bio fade-up">Data Engineering professional with 5+ years of hands-on experience building ETL pipelines, cloud data platforms, and analytics solutions on Azure and Databricks. Proven ability to lead engineering teams, establish best practices, and deliver end-to-end data solutions that drive measurable business impact.</p>
+        <p class="about-bio fade-up">Data Engineering professional with 6+ years of hands-on experience building ETL pipelines, cloud data platforms, and analytics solutions on Azure and Databricks. Proven ability to lead engineering teams, establish best practices, and deliver end-to-end data solutions that drive measurable business impact.</p>
         <div class="timeline">
           <div class="tl-item fade-up">
             <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
@@ -904,6 +947,10 @@
               <div class="tl-year">JAN 2024 — PRESENT</div>
               <div class="tl-role">Senior Data Engineer</div>
               <div class="tl-company">Tredence · Bangalore, India</div>
+              <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--teal);">↳ Supply Chain &nbsp;<span style="color:var(--dim);">Apr 2026 – Present</span></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--purple-light);">↳ DDH NextGen &nbsp;<span style="color:var(--dim);">Sep 2025 – Apr 2026</span></div>
+              </div>
             </div>
           </div>
           <div class="tl-item fade-up delay-1">
@@ -938,7 +985,6 @@
           <div class="info-row"><span class="info-icon">✉</span> devathrajharish@gmail.com</div>
           <div class="info-row"><span class="info-icon">📍</span> Bangalore, India</div>
           <div class="info-row"><span class="info-icon">🎓</span> MS CS · Univ. of Houston</div>
-          <div class="info-row"><span class="info-icon">🏆</span> Udacity Data Eng. Nanodegree</div>
         </div>
         <div class="glass-card">
           <div class="card-label">Key Achievements</div>
@@ -1022,7 +1068,7 @@
 <section id="badges">
   <div class="container">
     <div class="section-label fade-up">certifications</div>
-    <h2 class="section-h fade-up delay-1">Hall of Fame</h2>
+    <h2 class="section-h fade-up delay-1">Certified</h2>
     <div class="badge-strip fade-up delay-2">
       <img class="badge-thumb" src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/183934845" alt="Databricks DE Professional" loading="lazy">
       <img class="badge-thumb" src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/110473626" alt="Databricks DE Associate" loading="lazy">
@@ -1037,92 +1083,129 @@
       <img class="badge-thumb" src="https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/139416473" alt="Certification" loading="lazy">
     </div>
     <div class="badge-cta-row fade-up">
-      <a href="certifications.html" class="badge-cta">View Full Hall of Fame <span>→</span></a>
+      <a href="certifications.html" class="badge-cta">View All Credentials <span>→</span></a>
     </div>
   </div>
 </section>
 
-<!-- ── PROJECTS ── -->
+<!-- ── EXPERIENCE ── -->
 <section id="projects">
   <div class="container">
-    <div class="section-label fade-up">projects</div>
-    <h2 class="section-h fade-up delay-1">What I've Built</h2>
-    <div class="proj-grid">
+    <div class="section-label fade-up">experience</div>
+    <h2 class="section-h fade-up delay-1">Work Experience</h2>
 
-      <!-- FEATURED: AI Project -->
-      <div class="proj-card featured fade-up">
-        <div>
-          <span class="proj-badge pb-ai">Gen AI · RAG</span>
+    <!-- TREDENCE -->
+    <div class="exp-block fade-up">
+      <div class="exp-header">
+        <span class="exp-co-name">Tredence</span>
+        <span class="exp-co-period">Jan 2024 – Present · Bangalore, India</span>
+      </div>
+      <div class="proj-grid">
+        <div class="proj-card fade-up">
+          <span class="proj-badge pb-et">Supply Chain · Current</span>
+          <div class="proj-title">Supply Chain Data Integration Platform</div>
+          <p class="proj-desc">Engineering high-throughput ingestion pipelines processing 15B+ rows across supply chain systems — integrating REST APIs, SAP ECC, Teradata, and Oracle into a unified lakehouse. Contributing to data modeling tasks including STTM design and data exploration to accelerate reliable analytics delivery.</p>
+          <div class="proj-techs">
+            <span class="proj-tech">SAP ECC</span>
+            <span class="proj-tech">Oracle</span>
+            <span class="proj-tech">Teradata</span>
+            <span class="proj-tech">REST APIs</span>
+            <span class="proj-tech">PySpark</span>
+            <span class="proj-tech">Azure Databricks</span>
+            <span class="proj-tech">STTM Design</span>
+          </div>
+        </div>
+
+        <div class="proj-card fade-up delay-1">
+          <span class="proj-badge pb-az">Azure · Databricks</span>
+          <div class="proj-title">DDH NextGen — Digital Data Hub</div>
+          <p class="proj-desc">Led a team of 6 engineers to design and deliver the Digital Data Hub for enterprise subscribers. Owned sprint planning, code reviews, and technical decision-making to ship all milestones on schedule. Consolidated subscriber data across SAP, Teradata, and CSV sources on Azure Databricks.</p>
+          <div class="proj-techs">
+            <span class="proj-tech">PySpark</span>
+            <span class="proj-tech">Azure Databricks</span>
+            <span class="proj-tech">ADF</span>
+            <span class="proj-tech">SAP</span>
+            <span class="proj-tech">Teradata</span>
+            <span class="proj-tech">Synapse</span>
+          </div>
+        </div>
+
+        <div class="proj-card fade-up">
+          <span class="proj-badge pb-dq">Data Quality</span>
+          <div class="proj-title">Automated DQ &amp; Observability Framework</div>
+          <p class="proj-desc">Built an automated data quality validation framework using ICEDQ, catching 95%+ of anomalies before reaching production. Designed Grafana dashboards tracking 20+ pipeline KPIs for real-time monitoring and faster incident response.</p>
+          <div class="proj-techs">
+            <span class="proj-tech">ICEDQ</span>
+            <span class="proj-tech">Grafana</span>
+            <span class="proj-tech">Python</span>
+            <span class="proj-tech">Azure DevOps</span>
+          </div>
+        </div>
+
+        <div class="proj-card fade-up delay-1">
+          <div style="display:flex;align-items:center;margin-bottom:14px;">
+            <span class="proj-badge pb-ai" style="margin-bottom:0;">Gen AI · RAG</span>
+            <span class="poc-tag">POC</span>
+          </div>
           <div class="proj-title">AI Pipeline Failure Detection &amp; Auto-Resolution</div>
-          <p class="proj-desc">Built an AI-powered platform that transforms reactive pipeline firefighting into proactive self-healing. The system detects anomalies in real time, performs automated root cause analysis on scattered logs, and applies fixes autonomously — eliminating alert fatigue and reducing mean-time-to-resolution for data engineers.</p>
+          <p class="proj-desc">Built an AI-powered platform that transforms reactive pipeline firefighting into proactive self-healing. Detects anomalies in real time, performs automated root cause analysis on scattered logs, and applies fixes autonomously — eliminating alert fatigue and reducing MTTR for data engineers.</p>
           <div class="proj-techs">
             <span class="proj-tech">RAG</span>
             <span class="proj-tech">LLM</span>
             <span class="proj-tech">Python</span>
-            <span class="proj-tech">Real-time Anomaly Detection</span>
+            <span class="proj-tech">Anomaly Detection</span>
             <span class="proj-tech">Conversational AI</span>
           </div>
-        </div>
-        <div class="featured-right">
-          <a
-            href="https://medium.com/@harishdevatraj_89048/ai-to-the-rescue-automating-data-pipeline-failure-detection-and-resolution-a329c23aff52"
-            target="_blank"
-            rel="noopener"
-            class="proj-read-link"
-          >Read Article <span class="proj-read-arrow">→</span></a>
-        </div>
-      </div>
-
-      <div class="proj-card fade-up">
-        <span class="proj-badge pb-az">Azure · Databricks</span>
-        <div class="proj-title">DDH NextGen Data Platform</div>
-        <p class="proj-desc">Architected and built ingestion pipelines on Azure Databricks consolidating SAP, Teradata, and CSV sources — scaling dynamically from 10K to 5 billion rows using dynamic partitioning and Spark optimization.</p>
-        <div class="proj-techs">
-          <span class="proj-tech">PySpark</span>
-          <span class="proj-tech">Azure Databricks</span>
-          <span class="proj-tech">ADF</span>
-          <span class="proj-tech">SAP</span>
-          <span class="proj-tech">Teradata</span>
-          <span class="proj-tech">Synapse</span>
-        </div>
-      </div>
-      <div class="proj-card fade-up delay-1">
-        <span class="proj-badge pb-et">REST APIs · Capgemini</span>
-        <div class="proj-title">National Grid Integration Layer</div>
-        <p class="proj-desc">Built end-to-end Azure pipelines on Databricks to consolidate National Grid's energy systems data. Deployed 5+ REST APIs via Azure Function Apps integrating Power Plan, Datahub, and Copperleaf — delivering a 75% reduction in integration costs.</p>
-        <div class="proj-techs">
-          <span class="proj-tech">Function Apps</span>
-          <span class="proj-tech">Databricks</span>
-          <span class="proj-tech">Python</span>
-          <span class="proj-tech">Power BI</span>
-          <span class="proj-tech">SQL</span>
-        </div>
-      </div>
-      <div class="proj-card fade-up delay-2">
-        <span class="proj-badge pb-dq">Data Quality</span>
-        <div class="proj-title">Automated DQ &amp; Observability Framework</div>
-        <p class="proj-desc">Built an automated data quality validation framework using ICEDQ, catching 95%+ of anomalies before reaching production. Designed Grafana dashboards tracking 20+ pipeline KPIs for real-time monitoring and faster incident response.</p>
-        <div class="proj-techs">
-          <span class="proj-tech">ICEDQ</span>
-          <span class="proj-tech">Grafana</span>
-          <span class="proj-tech">Python</span>
-          <span class="proj-tech">Azure DevOps</span>
-        </div>
-      </div>
-      <div class="proj-card fade-up delay-3">
-        <span class="proj-badge pb-bd">Big Data · Hadoop</span>
-        <div class="proj-title">Big Data Analytics Platform</div>
-        <p class="proj-desc">Executed MapReduce jobs over a 200,000-file dataset using PySpark on a Hadoop cluster. Optimized storage by serializing results to Avro and Parquet formats with Snappy compression — significantly reducing disk usage while improving query performance.</p>
-        <div class="proj-techs">
-          <span class="proj-tech">PySpark</span>
-          <span class="proj-tech">Hadoop</span>
-          <span class="proj-tech">MapReduce</span>
-          <span class="proj-tech">HDFS</span>
-          <span class="proj-tech">Parquet</span>
-          <span class="proj-tech">Avro</span>
+          <a href="https://medium.com/@harishdevatraj_89048/ai-to-the-rescue-automating-data-pipeline-failure-detection-and-resolution-a329c23aff52" target="_blank" rel="noopener" class="proj-read-link" style="margin-top:16px;display:inline-flex;">Read Article <span class="proj-read-arrow">→</span></a>
         </div>
       </div>
     </div>
+
+    <!-- CAPGEMINI -->
+    <div class="exp-block fade-up delay-1">
+      <div class="exp-header">
+        <span class="exp-co-name">Capgemini</span>
+        <span class="exp-co-period">Jun 2022 – Jan 2024 · Houston, TX</span>
+      </div>
+      <div class="proj-grid">
+        <div class="proj-card fade-up">
+          <span class="proj-badge pb-et">REST APIs · National Grid</span>
+          <div class="proj-title">National Grid Integration Layer</div>
+          <p class="proj-desc">Built end-to-end Azure pipelines on Databricks to consolidate National Grid's energy systems data. Deployed 5+ REST APIs via Azure Function Apps integrating Power Plan, Datahub, and Copperleaf — delivering a 75% reduction in integration costs.</p>
+          <div class="proj-techs">
+            <span class="proj-tech">Function Apps</span>
+            <span class="proj-tech">Databricks</span>
+            <span class="proj-tech">Python</span>
+            <span class="proj-tech">Power BI</span>
+            <span class="proj-tech">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MINDTREE -->
+    <div class="exp-block fade-up delay-2">
+      <div class="exp-header">
+        <span class="exp-co-name">Mindtree</span>
+        <span class="exp-co-period">Nov 2020 – Jun 2022 · Seattle, WA</span>
+      </div>
+      <div class="proj-grid">
+        <div class="proj-card fade-up">
+          <span class="proj-badge pb-bd">Big Data · Hadoop</span>
+          <div class="proj-title">Big Data Analytics Platform</div>
+          <p class="proj-desc">Executed MapReduce jobs over a 200,000-file dataset using PySpark on a Hadoop cluster. Optimized storage by serializing results to Avro and Parquet formats with Snappy compression — significantly reducing disk usage while improving query performance.</p>
+          <div class="proj-techs">
+            <span class="proj-tech">PySpark</span>
+            <span class="proj-tech">Hadoop</span>
+            <span class="proj-tech">MapReduce</span>
+            <span class="proj-tech">HDFS</span>
+            <span class="proj-tech">Parquet</span>
+            <span class="proj-tech">Avro</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1177,7 +1260,7 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-logo">H<span style="color:var(--teal)">.</span>D</div>
-      <div class="footer-copy">© 2025 Harish Devathraj · Built with PySpark and ☕</div>
+      <div class="footer-copy">© 2026 Harish Devathraj · Built with PySpark and ☕</div>
       <div class="footer-links">
         <a href="https://github.com/devathrajharish" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/devathrajharish/" target="_blank" rel="noopener">LinkedIn</a>
@@ -1224,14 +1307,14 @@
       }, 22);
     }, delay);
   }
-  runCounter('c1', 5, '+', 200);
-  runCounter('c2', 5, 'B', 300);
+  runCounter('c1', 6, '+', 200);
+  runCounter('c2', 15, 'B', 300);
   runCounter('c3', 99, '.9%', 400);
 
   // ── Terminal log rotation ──
   const logs = [
     '$ processing ddh_nextgen batch...',
-    '✓ 5,000,000,000 rows ingested',
+    '✓ 15,000,000,000 rows ingested',
     '$ running ICEDQ validation rules',
     '✓ 0 anomalies passed to production',
     '$ grafana: all 20 KPIs nominal',
