@@ -1345,6 +1345,71 @@
     msg.style.display = 'block';
   }
 
+  // ── Analytics tracking ──
+  (function() {
+    const KEY = 'hd_analytics';
+    function getData() {
+      try { return JSON.parse(localStorage.getItem(KEY) || '{"views":0,"sessions":0,"events":[],"clicks":{}}'); }
+      catch { return { views: 0, sessions: 0, events: [], clicks: {} }; }
+    }
+    function save(d) { localStorage.setItem(KEY, JSON.stringify(d)); }
+    function logEvent(type, data) {
+      const d = getData();
+      d.events = d.events || [];
+      d.events.push({ ts: Date.now(), type, data: data || '' });
+      if (d.events.length > 200) d.events = d.events.slice(-200);
+      save(d);
+    }
+    // Page view + session
+    const d = getData();
+    d.views = (d.views || 0) + 1;
+    const lastSess = parseInt(localStorage.getItem('hd_last_sess') || '0');
+    if (Date.now() - lastSess > 30 * 60 * 1000) {
+      d.sessions = (d.sessions || 0) + 1;
+      localStorage.setItem('hd_last_sess', Date.now());
+      logEvent('session_start', document.referrer ? 'ref:' + document.referrer : 'direct');
+    }
+    save(d);
+    logEvent('pageview', location.pathname);
+    // Click tracking
+    const trackTargets = [
+      { sel: '.btn-primary',    label: 'CTA: View Projects' },
+      { sel: '.btn-outline',    label: 'CTA: Get In Touch' },
+      { sel: '.nav-cta',        label: 'Nav: Hire Me' },
+      { sel: 'a[href="certifications.html"]', label: 'Nav: Certs' },
+      { sel: '.badge-cta',      label: 'Badge: View Credentials' },
+      { sel: '.proj-read-link', label: 'Project: Read Article' },
+      { sel: '.contact-link[href^="mailto"]', label: 'Contact: Email' },
+      { sel: '.contact-link[href*="linkedin"]', label: 'Contact: LinkedIn' },
+      { sel: '.contact-link[href*="github"]',   label: 'Contact: GitHub' },
+      { sel: '.ct-send',        label: 'Contact: Send Message' },
+      { sel: '.badge-thumb',    label: 'Badge: Thumbnail Click' },
+    ];
+    trackTargets.forEach(({ sel, label }) => {
+      document.querySelectorAll(sel).forEach(el => {
+        el.addEventListener('click', () => {
+          const d = getData();
+          d.clicks = d.clicks || {};
+          d.clicks[label] = (d.clicks[label] || 0) + 1;
+          save(d);
+          logEvent('click', label);
+        });
+      });
+    });
+    // Project card clicks
+    document.querySelectorAll('.proj-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const title = card.querySelector('.proj-title')?.textContent?.trim() || 'Unknown';
+        const d = getData();
+        d.clicks = d.clicks || {};
+        const lbl = 'Card: ' + title.slice(0, 28);
+        d.clicks[lbl] = (d.clicks[lbl] || 0) + 1;
+        save(d);
+        logEvent('click', lbl);
+      });
+    });
+  })();
+
   // ── Active nav on scroll ──
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');

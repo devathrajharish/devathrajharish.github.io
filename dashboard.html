@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | H.D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:           #05050f;
+      --bg2:          #08081a;
+      --purple:       #7C6EE8;
+      --purple-light: #AFA9EC;
+      --teal:         #0ECFA5;
+      --blue:         #4A9EFF;
+      --amber:        #FAC775;
+      --red:          #FF5F6D;
+      --green:        #0ECFA5;
+      --text:         #E8E8FF;
+      --muted:        #7070A0;
+      --dim:          #3a3a5c;
+      --border:       rgba(124,110,232,0.18);
+      --border-h:     rgba(124,110,232,0.45);
+      --glow-p:       0 0 24px rgba(124,110,232,0.28);
+      --glow-t:       0 0 24px rgba(14,207,165,0.28);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124,110,232,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,110,232,0.03) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(90px); }
+    .orb-1 { width: 400px; height: 400px; background: rgba(124,110,232,0.055); top: -100px; right: -100px; }
+    .orb-2 { width: 300px; height: 300px; background: rgba(14,207,165,0.04); bottom: 60px; left: -80px; }
+
+    /* ── GATE ── */
+    #gate {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(5,5,15,0.96);
+      backdrop-filter: blur(18px);
+    }
+    .gate-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 48px 44px;
+      text-align: center;
+      width: 340px;
+      box-shadow: 0 0 60px rgba(124,110,232,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    .gate-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--purple-light);
+      letter-spacing: 4px;
+      margin-bottom: 6px;
+    }
+    .gate-logo span { color: var(--teal); }
+    .gate-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      display: block;
+    }
+    .gate-tag::before { content: '// '; color: var(--dim); }
+    .gate-input {
+      width: 100%;
+      background: rgba(124,110,232,0.06);
+      border: 1px solid rgba(124,110,232,0.25);
+      border-radius: 5px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 12px 14px;
+      outline: none;
+      text-align: center;
+      letter-spacing: 4px;
+      margin-bottom: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .gate-input:focus {
+      border-color: rgba(124,110,232,0.55);
+      box-shadow: var(--glow-p);
+    }
+    .gate-input::placeholder { color: var(--dim); letter-spacing: 1px; }
+    .gate-btn {
+      width: 100%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .gate-btn:hover { box-shadow: var(--glow-p); transform: translateY(-1px); }
+    .gate-error {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--red);
+      margin-top: 10px;
+      letter-spacing: 1px;
+      min-height: 18px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(5,5,15,0.88);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--purple-light);
+      letter-spacing: 3px;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+      border: 1px solid rgba(250,199,117,0.3);
+      padding: 4px 12px;
+      border-radius: 2px;
+    }
+    .nav-back {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--teal); }
+    #live-clock {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--dim);
+    }
+
+    /* ── LAYOUT ── */
+    #dashboard { display: none; }
+    .dash-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 2rem 60px;
+      position: relative;
+      z-index: 1;
+    }
+    .dash-header {
+      margin-bottom: 32px;
+    }
+    .dash-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .dash-label::before { content: '// '; color: var(--dim); }
+    .dash-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .dash-title span {
+      background: linear-gradient(130deg, var(--purple-light), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── GRID ── */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+    .panel {
+      background: rgba(255,255,255,0.022);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .panel:hover { border-color: var(--border-h); }
+    .panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--purple), transparent);
+      opacity: 0.5;
+    }
+    .panel.teal-accent::before { background: linear-gradient(90deg, transparent, var(--teal), transparent); }
+    .panel.amber-accent::before { background: linear-gradient(90deg, transparent, var(--amber), transparent); }
+    .panel.full { grid-column: 1 / -1; }
+    .panel.half { grid-column: span 2; }
+
+    .panel-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .panel-label::before { content: '//'; color: rgba(124,110,232,0.4); }
+    .panel-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    /* ── STATUS PANEL ── */
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--dim);
+      box-shadow: 0 0 0 0 rgba(14,207,165,0.4);
+    }
+    .status-dot.online {
+      background: var(--teal);
+      animation: pulse-status 2s infinite;
+    }
+    .status-dot.offline { background: var(--red); }
+    @keyframes pulse-status {
+      0%   { box-shadow: 0 0 0 0 rgba(14,207,165,0.5); }
+      70%  { box-shadow: 0 0 0 8px rgba(14,207,165,0); }
+      100% { box-shadow: 0 0 0 0 rgba(14,207,165,0); }
+    }
+    .status-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .status-text.online { color: var(--teal); }
+    .status-text.offline { color: var(--red); }
+    .status-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .latency-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 2px;
+      margin: 12px 0;
+      overflow: hidden;
+    }
+    .latency-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--purple));
+      border-radius: 2px;
+      transition: width 0.6s ease;
+    }
+    .refresh-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--dim);
+      padding: 5px 12px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      margin-top: 10px;
+    }
+    .refresh-btn:hover { color: var(--teal); border-color: rgba(14,207,165,0.4); }
+
+    /* ── STAT CARDS ── */
+    .stat-row { display: flex; gap: 14px; }
+    .stat-box {
+      flex: 1;
+      background: rgba(124,110,232,0.06);
+      border: 1px solid rgba(124,110,232,0.14);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+    }
+    .stat-box.teal { background: rgba(14,207,165,0.05); border-color: rgba(14,207,165,0.14); }
+    .stat-box.amber { background: rgba(250,199,117,0.05); border-color: rgba(250,199,117,0.14); }
+    .stat-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--purple-light);
+    }
+    .stat-box.teal .stat-val { color: var(--teal); }
+    .stat-box.amber .stat-val { color: var(--amber); }
+    .stat-lbl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-top: 4px;
+    }
+
+    /* ── COMMITS ── */
+    .commit-list { display: flex; flex-direction: column; gap: 10px; }
+    .commit-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 11px 14px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(124,110,232,0.1);
+      border-radius: 7px;
+      transition: border-color 0.2s;
+    }
+    .commit-item:hover { border-color: rgba(124,110,232,0.3); }
+    .commit-sha {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--purple);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+    .commit-msg {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text);
+      flex: 1;
+      line-height: 1.4;
+    }
+    .commit-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      color: var(--dim);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+    .commit-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(14,207,165,0.08);
+      border: 1px solid rgba(14,207,165,0.25);
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+
+    /* ── CLICK TRACKER ── */
+    .click-list { display: flex; flex-direction: column; gap: 8px; }
+    .click-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .click-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--muted);
+      width: 160px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .click-bar-wrap {
+      flex: 1;
+      height: 5px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .click-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), var(--teal));
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .click-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--purple-light);
+      width: 28px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .clear-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+      background: transparent;
+      border: 1px solid var(--dim);
+      padding: 4px 10px;
+      border-radius: 2px;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .clear-btn:hover { color: var(--red); border-color: rgba(255,95,109,0.4); }
+
+    /* ── SESSION LOG ── */
+    .session-list { display: flex; flex-direction: column; gap: 7px; max-height: 200px; overflow-y: auto; }
+    .session-list::-webkit-scrollbar { width: 3px; }
+    .session-list::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+    .session-entry {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      display: flex;
+      gap: 12px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.015);
+      border-radius: 4px;
+    }
+    .session-entry .se-time { color: var(--dim); flex-shrink: 0; }
+    .session-entry .se-event { color: var(--teal); flex-shrink: 0; }
+    .session-entry .se-data { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .empty-state {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--dim);
+      text-align: center;
+      padding: 24px 0;
+    }
+    .empty-state span { display: block; font-size: 20px; margin-bottom: 8px; }
+
+    /* ── PAGES PANEL ── */
+    .pages-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* ── LOADING ── */
+    .loading {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .loading-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--purple);
+      animation: dot-pulse 1.2s infinite;
+    }
+    .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dot-pulse {
+      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 900px) {
+      .dash-grid { grid-template-columns: 1fr 1fr; }
+      .panel.half { grid-column: 1 / -1; }
+    }
+    @media (max-width: 600px) {
+      .dash-grid { grid-template-columns: 1fr; }
+      .panel.full, .panel.half { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- ── PASSWORD GATE ── -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo">H<span>.</span>D</div>
+    <span class="gate-tag">dashboard_access</span>
+    <input
+      type="password"
+      id="pass-input"
+      class="gate-input"
+      placeholder="password"
+      onkeydown="if(event.key==='Enter') checkPassword()"
+      autocomplete="current-password"
+    >
+    <button class="gate-btn" onclick="checkPassword()">ACCESS →</button>
+    <div class="gate-error" id="gate-error"></div>
+  </div>
+</div>
+
+<!-- ── DASHBOARD ── -->
+<div id="dashboard">
+  <nav>
+    <a href="index.html" class="nav-logo">H<span>.</span>D</a>
+    <div class="nav-right">
+      <span id="live-clock"></span>
+      <span class="nav-tag">DASHBOARD</span>
+      <a href="index.html" class="nav-back">← Portfolio</a>
+    </div>
+  </nav>
+
+  <div class="dash-wrap">
+    <div class="dash-header">
+      <div class="dash-label">observability</div>
+      <div class="dash-title">Portfolio <span>Status & Analytics</span></div>
+    </div>
+
+    <div class="dash-grid">
+
+      <!-- SITE STATUS -->
+      <div class="panel teal-accent">
+        <div class="panel-label">site_status</div>
+        <div id="status-content">
+          <div class="loading"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>
+        </div>
+        <button class="refresh-btn" onclick="checkSiteStatus()">↻ Refresh</button>
+      </div>
+
+      <!-- PAGE VIEWS -->
+      <div class="panel">
+        <div class="panel-label">page_activity</div>
+        <div class="pages-stat-grid" id="activity-stats">
+          <div class="stat-box teal">
+            <div class="stat-val" id="total-views">—</div>
+            <div class="stat-lbl">Page Views</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="total-sessions">—</div>
+            <div class="stat-lbl">Sessions</div>
+          </div>
+          <div class="stat-box amber">
+            <div class="stat-val" id="total-clicks">—</div>
+            <div class="stat-lbl">Total Clicks</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="last-visit">—</div>
+            <div class="stat-lbl">Last Visit</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LAST DEPLOYMENT -->
+      <div class="panel amber-accent">
+        <div class="panel-label">last_deployment</div>
+        <div id="deploy-content">
+          <div class="loading"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>
+        </div>
+      </div>
+
+      <!-- CLICK TRACKING -->
+      <div class="panel half">
+        <div class="panel-label">click_tracking</div>
+        <div id="click-content">
+          <div class="empty-state"><span>🖱</span>No clicks recorded yet.<br>Visit your portfolio to start tracking.</div>
+        </div>
+      </div>
+
+      <!-- RECENT COMMITS (change review) -->
+      <div class="panel full">
+        <div class="panel-label">change_review — recent deployments</div>
+        <div id="commits-content">
+          <div class="loading"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>
+        </div>
+      </div>
+
+      <!-- SESSION LOG -->
+      <div class="panel full">
+        <div class="panel-label">session_log</div>
+        <div class="session-list" id="session-log">
+          <div class="empty-state"><span>📋</span>No events recorded yet.</div>
+        </div>
+        <button class="clear-btn" onclick="clearAnalytics()">✕ Clear All Data</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ── CONSTANTS ── */
+  const PASS_HASH = 'bbf53315ce68038137fbeb5d937c88d5da0901cf3222eeb3bad0d2da938bbf5c';
+  const REPO = 'devathrajharish/devathrajharish.github.io';
+  const SITE_URL = 'https://devathrajharish.github.io';
+  const STORAGE_KEY = 'hd_analytics';
+
+  /* ── SHA-256 ── */
+  async function sha256(msg) {
+    const buf = new TextEncoder().encode(msg);
+    const hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  /* ── AUTH ── */
+  async function checkPassword() {
+    const val = document.getElementById('pass-input').value;
+    const err = document.getElementById('gate-error');
+    if (!val) { err.textContent = 'Enter password.'; return; }
+    const hash = await sha256(val);
+    if (hash === PASS_HASH) {
+      sessionStorage.setItem('hd_auth', '1');
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      initDashboard();
+    } else {
+      err.textContent = '// ACCESS DENIED — invalid credentials';
+      document.getElementById('pass-input').value = '';
+    }
+  }
+
+  /* ── CLOCK ── */
+  function updateClock() {
+    const now = new Date();
+    document.getElementById('live-clock').textContent =
+      now.toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+  }
+
+  /* ── SITE STATUS ── */
+  async function checkSiteStatus() {
+    const el = document.getElementById('status-content');
+    el.innerHTML = '<div class="loading"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>';
+    const start = Date.now();
+    try {
+      await fetch(SITE_URL + '/index.html?t=' + Date.now(), { mode: 'no-cors', cache: 'no-store' });
+      const latency = Date.now() - start;
+      const pct = Math.min(100, Math.max(5, (500 - latency) / 5));
+      el.innerHTML = `
+        <div class="status-indicator">
+          <div class="status-dot online"></div>
+          <div class="status-text online">ONLINE</div>
+        </div>
+        <div class="status-meta">↳ portfolio.devathrajharish.in</div>
+        <div class="status-meta">↳ Latency: <span style="color:var(--teal)">${latency}ms</span></div>
+        <div class="latency-bar"><div class="latency-fill" style="width:${pct}%"></div></div>
+        <div class="status-meta" style="margin-top:4px">Checked: ${new Date().toLocaleTimeString()}</div>
+      `;
+    } catch(e) {
+      el.innerHTML = `
+        <div class="status-indicator">
+          <div class="status-dot offline"></div>
+          <div class="status-text offline">OFFLINE</div>
+        </div>
+        <div class="status-meta" style="color:var(--red)">Could not reach ${SITE_URL}</div>
+      `;
+    }
+  }
+
+  /* ── GITHUB API ── */
+  async function loadCommits() {
+    const el = document.getElementById('commits-content');
+    const dep = document.getElementById('deploy-content');
+    try {
+      const res = await fetch(`https://api.github.com/repos/${REPO}/commits?per_page=6`);
+      const commits = await res.json();
+      if (!Array.isArray(commits)) throw new Error('API limit');
+
+      // Last deployment card
+      const latest = commits[0];
+      const latestDate = new Date(latest.commit.author.date);
+      dep.innerHTML = `
+        <div class="status-meta" style="margin-bottom:8px">
+          <span style="color:var(--amber)">SHA</span> ${latest.sha.slice(0,7)}
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text);line-height:1.4;margin-bottom:12px">
+          ${latest.commit.message.split('\n')[0]}
+        </div>
+        <div class="status-meta">Deployed: <span style="color:var(--amber)">${latestDate.toLocaleDateString()} ${latestDate.toLocaleTimeString()}</span></div>
+        <div class="status-meta">Author: ${latest.commit.author.name}</div>
+      `;
+
+      // Commits list
+      el.innerHTML = '<div class="commit-list">' + commits.map((c, i) => {
+        const d = new Date(c.commit.author.date);
+        const ago = timeAgo(d);
+        return `
+          <div class="commit-item">
+            <span class="commit-sha">${c.sha.slice(0,7)}</span>
+            <span class="commit-msg">
+              ${i === 0 ? '<span class="commit-live">● LIVE</span> ' : ''}
+              ${escHtml(c.commit.message.split('\n')[0])}
+            </span>
+            <span class="commit-time">${ago}</span>
+          </div>
+        `;
+      }).join('') + '</div>';
+    } catch(e) {
+      el.innerHTML = '<div class="empty-state" style="text-align:left;padding:12px 0">Could not load commits — GitHub API limit reached. Try again later.</div>';
+      dep.innerHTML = '<div class="empty-state" style="text-align:left;padding:12px 0">Unavailable</div>';
+    }
+  }
+
+  /* ── ANALYTICS (localStorage) ── */
+  function getAnalytics() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"views":0,"sessions":0,"events":[],"clicks":{}}'); }
+    catch { return { views: 0, sessions: 0, events: [], clicks: {} }; }
+  }
+
+  function loadAnalytics() {
+    const data = getAnalytics();
+    document.getElementById('total-views').textContent = data.views || 0;
+    document.getElementById('total-sessions').textContent = data.sessions || 0;
+    document.getElementById('total-clicks').textContent =
+      Object.values(data.clicks || {}).reduce((a,b) => a+b, 0);
+
+    const events = data.events || [];
+    if (events.length > 0) {
+      const lastEvt = new Date(events[events.length - 1].ts);
+      document.getElementById('last-visit').textContent = timeAgo(lastEvt);
+    } else {
+      document.getElementById('last-visit').textContent = 'Never';
+    }
+
+    // Click bars
+    const clicks = data.clicks || {};
+    const entries = Object.entries(clicks).sort((a,b) => b[1]-a[1]);
+    const max = entries.length ? entries[0][1] : 1;
+    const clickEl = document.getElementById('click-content');
+    if (entries.length === 0) {
+      clickEl.innerHTML = '<div class="empty-state"><span>🖱</span>No clicks yet.<br>Visit your portfolio to start tracking.</div>';
+    } else {
+      clickEl.innerHTML = '<div class="click-list">' +
+        entries.slice(0, 10).map(([label, count]) => `
+          <div class="click-row">
+            <span class="click-label">${escHtml(label)}</span>
+            <div class="click-bar-wrap"><div class="click-bar" style="width:${Math.round(count/max*100)}%"></div></div>
+            <span class="click-count">${count}</span>
+          </div>
+        `).join('') +
+      '</div>';
+    }
+
+    // Session log
+    const logEl = document.getElementById('session-log');
+    if (events.length === 0) {
+      logEl.innerHTML = '<div class="empty-state"><span>📋</span>No events recorded yet.</div>';
+    } else {
+      logEl.innerHTML = [...events].reverse().slice(0, 50).map(e => `
+        <div class="session-entry">
+          <span class="se-time">${new Date(e.ts).toLocaleTimeString()}</span>
+          <span class="se-event">${escHtml(e.type)}</span>
+          <span class="se-data">${escHtml(e.data || '')}</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  function clearAnalytics() {
+    if (confirm('Clear all tracked analytics data?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      loadAnalytics();
+    }
+  }
+
+  /* ── HELPERS ── */
+  function timeAgo(date) {
+    const sec = Math.floor((Date.now() - date) / 1000);
+    if (sec < 60) return sec + 's ago';
+    if (sec < 3600) return Math.floor(sec/60) + 'm ago';
+    if (sec < 86400) return Math.floor(sec/3600) + 'h ago';
+    return Math.floor(sec/86400) + 'd ago';
+  }
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  /* ── INIT ── */
+  function initDashboard() {
+    updateClock();
+    setInterval(updateClock, 1000);
+    checkSiteStatus();
+    loadCommits();
+    loadAnalytics();
+    setInterval(loadAnalytics, 10000);
+  }
+
+  /* ── AUTO-AUTH ── */
+  if (sessionStorage.getItem('hd_auth') === '1') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    initDashboard();
+  }
+</script>
+</body>
+</html>
